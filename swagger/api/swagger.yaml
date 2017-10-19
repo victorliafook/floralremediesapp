@@ -1,0 +1,297 @@
+---
+swagger: "2.0"
+info:
+  description: "Simple Floral Remedies API"
+  version: "1.0.0"
+  title: "Floral Remedies API"
+  contact:
+    email: "victorliafook@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "virtserver.swaggerhub.com"
+basePath: "/smokytownfunkyshrimp/FloraessenciaFlorais/1.0.0"
+tags:
+- name: "systems"
+  description: "operations related to remedies' system"
+- name: "essences"
+  description: "operations related to floral essences"
+schemes:
+- "https"
+paths:
+  /system:
+    get:
+      tags:
+      - "systems"
+      summary: "get all systems"
+      operationId: "getSystems"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "search results matching criteria"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Essence"
+        400:
+          description: "bad input parameter"
+      x-swagger-router-controller: "Systems"
+    post:
+      tags:
+      - "systems"
+      summary: "create a new floral essences system"
+      operationId: "createSystem"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "new system created successfully"
+          schema:
+            $ref: "#/definitions/inline_response_200"
+        400:
+          description: "bad input parameters"
+      x-swagger-router-controller: "Systems"
+  /system/{systemId}:
+    get:
+      tags:
+      - "systems"
+      summary: "get a system's details"
+      operationId: "getsystem"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "systemId"
+        in: "path"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "search results matching criteria"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/EssenceSystem"
+        400:
+          description: "bad input parameter"
+      x-swagger-router-controller: "Systems"
+    post:
+      tags:
+      - "systems"
+      summary: "updates a floral essences system"
+      operationId: "updateSystem"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "systemId"
+        in: "path"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "search results matching criteria"
+          schema:
+            $ref: "#/definitions/inline_response_200_1"
+        400:
+          description: "bad input parameters"
+      x-swagger-router-controller: "Systems"
+    delete:
+      tags:
+      - "systems"
+      summary: "delete an essence by id"
+      operationId: "deleteSystem"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "systemId"
+        in: "path"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "the essence system was deleted succesfully"
+          schema:
+            $ref: "#/definitions/Essence"
+      x-swagger-router-controller: "Systems"
+  /system/{systemId}/essences:
+    get:
+      tags:
+      - "systems"
+      - "essences"
+      summary: "get system's essences"
+      operationId: "getSystemEssences"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "systemId"
+        in: "path"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "search results matching criteria"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Essence"
+        400:
+          description: "bad input parameter"
+      x-swagger-router-controller: "Systems"
+  /essence:
+    post:
+      tags:
+      - "essences"
+      summary: "create a new floral essence"
+      operationId: "createEssence"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "search results matching criteria"
+          schema:
+            $ref: "#/definitions/inline_response_200"
+        400:
+          description: "bad input parameters"
+      x-swagger-router-controller: "Essences"
+  /essence/{essenceId}:
+    get:
+      tags:
+      - "essences"
+      summary: "get essence's details"
+      operationId: "getEssence"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "essenceId"
+        in: "path"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "the requested essence's details"
+          schema:
+            $ref: "#/definitions/Essence"
+      x-swagger-router-controller: "Essences"
+    post:
+      tags:
+      - "essences"
+      summary: "updates a floral essence"
+      operationId: "updateEssence"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "essenceId"
+        in: "path"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "essence updated successfully"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+        400:
+          description: "bad input parameters"
+      x-swagger-router-controller: "Essences"
+    delete:
+      tags:
+      - "essences"
+      summary: "delete an essence by id"
+      operationId: "deleteEssence"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "essenceId"
+        in: "path"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "the essence was deleted succesfully"
+          schema:
+            $ref: "#/definitions/Essence"
+      x-swagger-router-controller: "Essences"
+definitions:
+  Essence:
+    type: "object"
+    required:
+    - "EssenceSystem"
+    - "id"
+    - "image"
+    - "name"
+    - "negativeAspectsText"
+    - "positiveAspectsText"
+    - "scientificName"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      name:
+        type: "string"
+        example: "Walnut"
+      scientificName:
+        type: "string"
+        example: "Juglans regia"
+      description:
+        type: "string"
+        example: "Lorem Ipsum Dolor Sit Amet"
+      image:
+        type: "string"
+        example: "walnut.jpg"
+      positiveAspectsText:
+        type: "string"
+        example: "Lorem Ipsum Dolor Sit Amet"
+      negativeAspectsText:
+        type: "string"
+        example: "Lorem Ipsum Dolor Sit Amet"
+      created:
+        type: "string"
+        format: "int32"
+        example: "2016-08-29T09:12:33.001Z"
+      updated:
+        type: "string"
+        format: "int32"
+        example: "2016-08-29T09:12:33.001Z"
+      EssenceSystem:
+        $ref: "#/definitions/EssenceSystem"
+  EssenceSystem:
+    required:
+    - "name"
+    properties:
+      name:
+        type: "string"
+        example: "Bach"
+      image:
+        type: "string"
+        example: "bach.jpg"
+      url:
+        type: "string"
+        format: "url"
+        example: "https://www.acme-corp.com"
+      description:
+        type: "string"
+  inline_response_200:
+    properties:
+      id:
+        type: "integer"
+        description: "The inserted system's ID."
+  inline_response_200_1:
+    properties:
+      id:
+        type: "integer"
+        description: "The updated system's ID."
+  inline_response_200_2:
+    properties:
+      id:
+        type: "integer"
+        description: "The updated floral's ID."
