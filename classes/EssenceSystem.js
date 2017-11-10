@@ -5,5 +5,6 @@ module.exports = class EssenceSystem{
         this.url = url;
         this.thumbnail = thumbnail;
         this.description = description;
+        this.essences = [];
     }
 }
