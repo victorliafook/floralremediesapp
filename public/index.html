@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="floralApp">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <title>Open Movie Database Search</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="app.css"/>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+</head>
+
+<body id="body" ng-controller="mainController">
+    <div id="page-loading">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Navigation -->
+
+    <!-- Page Content -->
+    <div class="container-fluid" ng-if="page=='selection'">
+        <div class="row text-center">
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2" ng-repeat="item in resultList" ng-cloak ng-click="selectOne(item)">
+
+                <div class="panel panel-primary panel-front" ng-class="verifyChoice(item)" data-toggle="modal">
+                    <div class="media">
+                        <img ng-src="img/{{item.scientificName.replace(' ','-').toLowerCase()}}.jpg" class="img-thumbnail img-responsive">
+                    </div>
+                    &nbsp;
+                </div>
+
+            </div>
+        </div>
+ 
+    </div>
+    <div class="container-fluid" ng-if="page=='form'">
+        <div class="row text-center">
+            
+        </div>
+ 
+    </div>
+    <div class="container-fluid" ng-if="page=='result'">
+        <div class="row text-center">
+            
+        </div>
+ 
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-resource.js"></script>
+    
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="app.js"></script>
+    <script src="services.js"></script>
+
+
+</body>
+
+</html>

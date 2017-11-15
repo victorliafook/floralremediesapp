@@ -9,6 +9,7 @@ var floralsCollection;
 var usersCollection;
 
 var app = express();
+app.use(express.static('public'));
 
 //set middlewares
 app.use(express.bodyParser());
@@ -80,6 +81,7 @@ app.post('/api/system/:systemSN', function(req, res){
         }
         
         var essences = doc.essences;
+        essences = essences.filter(function(val){return val !== null});
         essences.push(newEssence);
         floralsCollection.update({shortname: doc.shortname},{$set:{essences: essences}});
         res.json(doc);
@@ -109,6 +111,7 @@ app.get('/api/system/:systemSN/essences', function(req, res){
 app.post('/api/essence', function(req, res){
     
     //floralsCollection.insertOne({term: query, when: new Date()});
+    res.send("disabled");
     
 });
 
