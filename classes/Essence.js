@@ -5,7 +5,7 @@ module.exports = class Essence{
         this.scientificName = scientificName;
         this.thumbnail = thumbnail;
         this.description = description;
-        this.shortname = systemSN + this.normalizeStr(scientificName);
+        this.shortname = systemSN + '-' + this.normalizeStr(scientificName);
         this.positiveAspectsText = "";
         this.negativeAspectsText = "";
     }

@@ -37,4 +37,7 @@ angular.module('floralApp', ['ngResource'])
         $scope.today = function(){
             return (new Date()).toLocaleDateString();  
         };
+    }])
+    .controller("adminController", ['$scope', 'dataService', function($scope, dataService) {
+        
     }]);
