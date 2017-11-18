@@ -76,6 +76,8 @@ app.post('/api/system/:systemSN', function(req, res){
         var body = req.body;
         try{
             var newEssence = new Essence(body.name, body.scientificName, body.thumbnail, body.description, params.systemSN);
+            newEssence.setPositiveAspectsText(body.positiveAspectsText);
+            newEssence.setNegativeAspectsText(body.negativeAspectsText);
         }catch(exception){
             res.send("Bad input");
         }

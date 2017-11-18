@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" href="img/favicon.png">
-    <title>Open Movie Database Search</title>
+    <title>Floraessência - Descubra sua essência</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="app.css"/>
@@ -30,15 +30,23 @@
     <!-- Navigation -->
 
     <!-- Page Content -->
-    <div class="container-fluid" ng-if="page=='selection'">
+    <div class="container" ng-cloak ng-if="page=='selection'">
+        <div class="row text-center p-3">
+            <div class="col-md-12">
+                <h3>Observe calmamente as flores abaixo</h3>
+            </div>
+        </div>
+        <div class="row text-center p-3">
+            <div class="col-md-12">
+                <p ng-show="likeSelection.length < 3">Escolha as 3 flores que <strong>mais</strong> lhe agradam:</p>
+                <p ng-show="likeSelection.length >= 3">Escolha as 3 flores que <strong>menos</strong> lhe agradam:<p>
+            </div>
+        </div>
         <div class="row text-center">
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2" ng-repeat="item in resultList" ng-cloak ng-click="selectOne(item)">
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 p-3 alert" ng-repeat="item in resultList" ng-cloak  ng-class="verifyChoice(item)" ng-click="selectOne(item)">
 
-                <div class="panel panel-primary panel-front" ng-class="verifyChoice(item)" data-toggle="modal">
-                    <div class="media">
-                        <img ng-src="img/{{item.scientificName.replace(' ','-').toLowerCase()}}.jpg" class="img-thumbnail img-responsive">
-                    </div>
-                    &nbsp;
+                <div class="media">
+                    <img ng-src="img/{{item.scientificName.replace(' ','-').toLowerCase()}}.jpg" class="img-thumbnail img-responsive">
                 </div>
 
             </div>
@@ -51,7 +59,7 @@
         </div>
  
     </div>
-    <div class="container-fluid" ng-if="page=='result'">
+    <div class="container" ng-cloak ng-if="page=='result'">
         <div class="row text-center p-3">
             <div class="col-md-12">
                 <h3>SEU NOME - <span>{{today()}}</span></h3>
@@ -59,36 +67,52 @@
         </div>
         <div class="row text-left p-2">
             <div class="col-md-12">
-                <p>As seguintes flores foram as suas preferidas e podem estar relacionadas a aspectos positivos de sua personalidade que, por alguma razao podem estar adormecidos.</p>
+                <div class="alert alert-info" role="alert">
+                    <p>As seguintes flores foram as suas preferidas e podem estar relacionadas a aspectos positivos de sua personalidade que, por alguma razao podem estar adormecidos.</p>
+                </div>
             </div>
         </div>
         <div ng-repeat="item in likeSelection" class="row text-left p-3">
-            <div class="col-md-12">
-                <div class="media">
-                    <div class="media-left">
-                        <img ng-src="img/{{item.scientificName.replace(' ','-').toLowerCase()}}.jpg" class="img-thumbnail media-object">
-                    </div>
-                    <div class="media-body px-3">
-                        <h4 class="media-heading">{{item.name}}</h4>
-                        <p>{{item.description}}</p>
+            <div class="col-md-12 card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6 col-xs-12 mb-3">
+                            <img ng-src="img/{{item.scientificName.replace(' ','-').toLowerCase()}}.jpg" class="img-thumbnail media-object">
+                        </div>
+                        <div class="col-md-8 col-sm-6 col-xs-12 px-3">
+                            <h4 class="media-heading">{{item.name}}</h4>
+                            <p class="text-justify">{{item.description}}</p>
+                            <h5 class="text-success">Aspectos Positivos</h4>
+                            <p>{{item.positiveAspectsText}}</p>
+                            <h5 class="text-warning">Aspectos Negativos</h4>
+                            <p>{{item.negativeAspectsText}}</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row text-left p-2">
             <div class="col-md-12">
-                <p>As flores abaixo nao lhe agradaram e podem estar relacionadas as suas dificuldades</p>
+                <div class="alert alert-warning" role="alert">
+                    <p>As flores abaixo nao lhe agradaram e podem estar relacionadas as suas dificuldades.</p>
+                </div>
             </div>
         </div>
         <div ng-repeat="item in dislikeSelection" class="row text-left p-3">
-            <div class="col-md-12">
-                <div class="media">
-                    <div class="media-left">
-                        <img ng-src="img/{{item.scientificName.replace(' ','-').toLowerCase()}}.jpg" class="img-thumbnail media-object">
-                    </div>
-                    <div class="media-body px-3">
-                        <h4 class="media-heading">{{item.name}}</h4>
-                        <p>{{item.description}}</p>
+            <div class="col-md-12 card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6 col-xs-12 mb-3">
+                            <img ng-src="img/{{item.scientificName.replace(' ','-').toLowerCase()}}.jpg" class="img-thumbnail media-object">
+                        </div>
+                        <div class="col-md-8 col-sm-6 col-xs-12 px-3">
+                            <h4 class="media-heading">{{item.name}}</h4>
+                            <p class="text-justify">{{item.description}}</p>
+                            <h5 class="text-success">Aspectos Positivos</h4>
+                            <p>{{item.positiveAspectsText}}</p>
+                            <h5 class="text-warning">Aspectos Negativos</h4>
+                            <p>{{item.negativeAspectsText}}</p>
+                        </div>
                     </div>
                 </div>
             </div>

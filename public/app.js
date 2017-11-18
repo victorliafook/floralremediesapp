@@ -29,9 +29,9 @@ angular.module('floralApp', ['ngResource'])
         
         $scope.verifyChoice = function(elem){
             if($scope.likeSelection.indexOf(elem) >= 0)
-                return 'like';
+                return 'alert-success';
             if($scope.dislikeSelection.indexOf(elem) >= 0)
-                return 'dislike';
+                return 'alert-danger';
         };
         
         $scope.today = function(){
