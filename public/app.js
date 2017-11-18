@@ -23,7 +23,7 @@ angular.module('floralApp', ['ngResource'])
                 return;
             ($scope.likeSelection.length < $scope.sl_number) ? $scope.likeSelection.push(elem) : $scope.dislikeSelection.push(elem);
             if($scope.likeSelection.length === $scope.sl_number && $scope.dislikeSelection.length === $scope.sl_number){
-                $scope.page = 'form';
+                $scope.page = 'result';
             }
         };
         
@@ -32,5 +32,9 @@ angular.module('floralApp', ['ngResource'])
                 return 'like';
             if($scope.dislikeSelection.indexOf(elem) >= 0)
                 return 'dislike';
+        };
+        
+        $scope.today = function(){
+            return (new Date()).toLocaleDateString();  
         };
     }]);

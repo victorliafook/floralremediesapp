@@ -5,3 +5,7 @@
 .dislike {
     background-color: red;
 }
+
+img.img-thumbnail {
+    width: 300px;
+}
