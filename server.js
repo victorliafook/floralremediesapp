@@ -41,7 +41,7 @@ mongodb.connect(MONGODB_URI, function(err, db) {
     
 });
 
-app.post('api/*', function(req, res, next) {
+app.post('/api/*', function(req, res, next) {
     //console.log(req);
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
     // decode token

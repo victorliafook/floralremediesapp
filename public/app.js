@@ -39,5 +39,20 @@ angular.module('floralApp', ['ngResource'])
         };
     }])
     .controller("adminController", ['$scope', 'dataService', function($scope, dataService) {
+        $scope.username = "";
+        $scope.password = "";
+        $scope.message = "";
         
+        $scope.formLogin = function(){
+            dataService.authenticate($scope.username, $scope.password).then(function(err, data){
+                if(err){
+                    console.log(err);
+                    return;
+                }
+                if(data.success){
+                    dataService.apitoken = data.token;
+                }
+                $scope.message = data.message;
+            });
+        }
     }]);
