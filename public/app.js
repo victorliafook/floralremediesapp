@@ -10,9 +10,9 @@ angular.module('floralApp', ['ngResource'])
         $scope.dislikeSelection = [];
         $scope.page = "selection";
         
-        dataService.getSystemEssences('bach').then(function(res){
-            //if(res.data)
-                $scope.resultList = res;
+        dataService.getSystem('bach').then(function(res){
+            if(res)
+                $scope.resultList = res.essences;
             console.log(res);
         });
         
@@ -38,21 +38,34 @@ angular.module('floralApp', ['ngResource'])
             return (new Date()).toLocaleDateString();  
         };
     }])
-    .controller("adminController", ['$scope', 'dataService', function($scope, dataService) {
+    .controller("adminController", ['$scope', 'dataService', '$window', function($scope, dataService, $window) {
         $scope.username = "";
         $scope.password = "";
         $scope.message = "";
+        $scope.systemList = [];
+        $scope.essenceList = [];
         
         $scope.formLogin = function(){
-            dataService.authenticate($scope.username, $scope.password).then(function(err, data){
-                if(err){
-                    console.log(err);
-                    return;
-                }
+            dataService.authenticate($scope.username, $scope.password).then(function(data){
+
                 if(data.success){
                     dataService.apitoken = data.token;
+                    
+                    $window.location.href = 'forms.html';
                 }
                 $scope.message = data.message;
             });
-        }
+        };
+        
+        $scope.logout = function(){
+            dataService.apitoken = null;
+        };
+        
+        dataService.getSystem('bach').then(function(res){
+            if(res)
+                $scope.essenceList = res.essences;
+            console.log(res);
+        });
+        
+        
     }]);

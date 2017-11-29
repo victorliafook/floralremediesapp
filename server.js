@@ -95,6 +95,7 @@ app.post('/authenticate', function(req, res) {
 
 });
 
+//get all the systems
 app.get('/api/system', function(req, res){
     
     floralsCollection.find({}).toArray(function(error, documents) {
@@ -107,6 +108,7 @@ app.get('/api/system', function(req, res){
     
 });
 
+//create a new system
 app.post('/api/system', function(req, res){
     
     
@@ -124,7 +126,7 @@ app.post('/api/system', function(req, res){
 
 app.get('/api/system/:systemSN', function(req, res){
     var params = req.params;
-    floralsCollection.find({shortname: params.systemSN}).toArray(function(error, documents) {
+    floralsCollection.findOne({shortname: params.systemSN}, function(error, documents) {
         if (error){
             console.log(error);
         }

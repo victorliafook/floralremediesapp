@@ -9,3 +9,7 @@
 img.img-thumbnail {
     width: 300px;
 }
+
+img.img-thumbnail.img-list {
+    width: 100px;
+}

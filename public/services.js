@@ -5,14 +5,17 @@ angular.module("floralApp")
     .constant("authURL","/authenticate")
     .service('dataService', ['$resource', 'baseURL', 'authURL', function($resource, baseURL, authURL) {
         this.token = "";
-        this.getSystemEssences = function(systemSN) {
-            return $resource(baseURL + 'system/:systemSN/essences', {systemSN : systemSN}, {
-                save: {
-                    method: 'POST',
-                    headers: {
-                        'x-access-token': this.token
-                    }
-                }}).query().$promise;
+        this.systemDAO = $resource(baseURL + 'system/:systemSN', {}, {
+            save: {
+                method: 'POST',
+                headers: {
+                    'x-access-token': this.token
+                }
+            }
+        });
+        
+        this.getSystem = function(systemSN) {
+            return this.systemDAO.get({ systemSN: systemSN }).$promise;
         };
         
         this.authenticate = function(username, password) {
